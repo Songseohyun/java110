@@ -27,7 +27,7 @@ public class App {
                 ManagerController.serviceManagerMenu();
                 
             } else if (menu.equals("0")){
-                System.out.println("안녕히 가세요!");
+                System.out.println("프로그램을 종료합니다.");
                 break;
             }
         }

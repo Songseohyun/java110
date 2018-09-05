@@ -20,7 +20,6 @@ public class StudentList {
         }
         students = newList;
     }
-    
     public static void remove(int no) {
         if (no < 0 || no >= studentIndex) {
             return;
