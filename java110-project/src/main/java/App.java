@@ -33,15 +33,39 @@ public class App {
             return "이름: "+name+",이메일: " +  email + ",비밀번호: "+password;
         }
     }
+    static class Student extends Member{
+        protected String school;
+        protected boolean working;
+        protected String tel;
+        public String getSchool() {
+            return school;
+        }
+        public void setSchool(String school) {
+            this.school = school;
+        }
+        public boolean isWorking() {
+            return working;
+        }
+        public void setWorking(boolean working) {
+            this.working = working;
+        }
+        public String getTel() {
+            return tel;
+        }
+        public void setTel(String tel) {
+            this.tel = tel;
+        }
+        
+    }
     
-    
-    static Member[] members = new Member[100];
+    static Student[] students = new Student[100];
     static int index = 0;
     
      static Scanner KeyIn = new Scanner(System.in);
 
     public static void main(String[] args) {
         
+       
         while(true) {
         String menu = promptMenu();
         if(menu.equals("1")) {
@@ -52,7 +76,7 @@ public class App {
         }
         }
         KeyIn.close();
-        
+          
           
     
     }
@@ -62,9 +86,9 @@ public class App {
             System.out.println("학생 관리 > 추가:add 목록:list 닫기:quit");
             String command = KeyIn.nextLine();
             if(command.equalsIgnoreCase("list")) {
-                printMembers();
+                printStudents();
             }else if(command.equalsIgnoreCase("add")) {
-                inputMembers();
+                inputStudents();
             }else if(command.equalsIgnoreCase("quit")) {
                 break;
             }
@@ -85,7 +109,6 @@ public class App {
            System.out.println("메뉴 번호 > ");
            
            String menu = KeyIn.nextLine();
-           System.out.println(menu);
            
            switch(menu) {
            case "0":
@@ -101,17 +124,22 @@ public class App {
            
     }
     
-        static void printMembers() {
-            for(int i = 0; i < index; i++) {
-                System.out.printf("%s, %s, %s\n", members[i].getName(), members[i].getEmail(), members[i].getPassword());
-        }
+        static void printStudents() {
+            int count = 0;
+            for(Student s : students) {
+                if(count++ == index)
+                    break;
+                System.out.printf
+                ("%s, %s, %s, %s, %b, %s\n", 
+                        s.getName(),s.getEmail(),s.getPassword(),s.getSchool(),s.isWorking(),s.getTel());
+        }  
 }
-        static void inputMembers() {
-            while(true) {
-                Member m  = new Member(); 
+        static void inputStudents() {
+            while(true) {  
+                Student m  = new Student(); 
                 
                 System.out.print("이름을 입력하세요 :\t");
-               m.setName(KeyIn.nextLine());
+                m.setName(KeyIn.nextLine());
                 
                 System.out.print("이메일을 입력하세요 :\t ");
                 m.setEmail(KeyIn.nextLine());
@@ -119,7 +147,16 @@ public class App {
                 System.out.print("암호를 입력하세요 :\t"); 
                 m.setPassword(KeyIn.nextLine());
                 
-                members[index++] = m;
+                System.out.print("최종학력을 입력하세요 :\t");
+                m.setSchool(KeyIn.nextLine());
+                
+                System.out.print("재직여부: (true/false)\t ");
+                m.setWorking(Boolean.parseBoolean(KeyIn.nextLine()));
+                
+                System.out.print("전화번호를 입력하세요 : \t");
+                m.setTel(KeyIn.nextLine());
+                
+                students[index++] = m;
                 
                 System.out.println("계속 하시겠습니까? (Y/n) ");
                 
