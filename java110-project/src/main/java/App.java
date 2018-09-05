@@ -32,7 +32,8 @@ public class App {
         public String toString() {
             return "이름: "+name+",이메일: " +  email + ",비밀번호: "+password;
         }
-    }    
+    }
+    
     
     static Member[] members = new Member[100];
     static int index = 0;
@@ -41,10 +42,63 @@ public class App {
 
     public static void main(String[] args) {
         
-       inputMembers();
-       printMembers();
+        while(true) {
+        String menu = promptMenu();
+        if(menu.equals("1")) {
+            serviceStudentMenu();
+        }else if(menu.equals("0")) {
+            System.out.println("프로그램이 종료됩니다.");
+            break;
+        }
+        }
+        KeyIn.close();
+        
+          
+    
+    }
 
-        KeyIn.close(); 
+    private static void serviceStudentMenu() {
+        while(true) {
+            System.out.println("학생 관리 > 추가:add 목록:list 닫기:quit");
+            String command = KeyIn.nextLine();
+            if(command.equalsIgnoreCase("list")) {
+                printMembers();
+            }else if(command.equalsIgnoreCase("add")) {
+                inputMembers();
+            }else if(command.equalsIgnoreCase("quit")) {
+                break;
+            }
+            else {
+                System.out.println("유효하지 않는 명령어입니다.");
+            }
+        }
+    }
+
+    private static String promptMenu() {
+           System.out.println("[메뉴]");
+           System.out.println("1. 학생 관리");
+           System.out.println("2. 강사 관리");
+           System.out.println("3. 매니저 관리");
+           System.out.println("0. 닫기");
+           
+           while(true) {
+           System.out.println("메뉴 번호 > ");
+           
+           String menu = KeyIn.nextLine();
+           System.out.println(menu);
+           
+           switch(menu) {
+           case "0":
+           case "1":
+           case "2":
+           case "3":
+               return menu;
+           default:
+               System.out.println("메뉴 번호가 유효하지 않습니다.");
+           }
+        }
+           
+           
     }
     
         static void printMembers() {
