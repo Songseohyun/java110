@@ -4,14 +4,17 @@ import java.util.Scanner;
 
 import bitcamp.java110.cms.domain.Student;
 import bitcamp.java110.cms.util.LinkedList;
+import bitcamp.java110.cms.util.List;
 
 public class StudentController {
     
-    private LinkedList<Student> students = new LinkedList<>(); 
+    private List<Student> students = new LinkedList<>(); 
     public Scanner keyIn;
     
-    public StudentController(Scanner keyIn) {
+    public StudentController(Scanner keyIn, List<Student> students) {
         this.keyIn = keyIn;
+        this.students = students;
+        init();
     }
     
     public void serviceStudentMenu() {
@@ -112,7 +115,7 @@ public class StudentController {
         System.out.printf("재직여부: %b\n", student.isWorking());
     }
     
-    {
+    private void init(){
         Student s = new Student();
         s.setName("a");
         students.add(s);

@@ -4,13 +4,15 @@ import java.util.Scanner;
 
 import bitcamp.java110.cms.domain.Teacher;
 import bitcamp.java110.cms.util.LinkedList;
+import bitcamp.java110.cms.util.List;
 
 public class TeacherController {
-    private LinkedList<Teacher> teachers = new LinkedList<>();
+    private List<Teacher> teachers = new LinkedList<>();
     public Scanner keyIn;
     
-    public TeacherController(Scanner keyIn) {
+    public TeacherController(Scanner keyIn , List<Teacher> teachers) {
         this.keyIn = keyIn;
+        this.teachers = teachers;
     }
  
     public void serviceTeacherMenu() {
