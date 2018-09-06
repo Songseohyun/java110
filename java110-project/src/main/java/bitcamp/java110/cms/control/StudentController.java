@@ -7,7 +7,7 @@ import bitcamp.java110.cms.util.ArrayList;
 
 public class StudentController {
     
-    private ArrayList students = new ArrayList(); 
+    private ArrayList<Student> students = new ArrayList<>(); 
     public Scanner keyIn;
     
     public StudentController(Scanner keyIn) {
@@ -16,9 +16,9 @@ public class StudentController {
     
     public void serviceStudentMenu() {
         while (true) {
-            System.out.print("학생 관리> 추가:add 전체보기:students 삭제:delete 회원보기:detail 나가기:quit  ");
+            System.out.print("학생 관리> 추가:add 전체보기:list 삭제:delete 회원보기:detail 나가기:quit  ");
             String command = keyIn.nextLine();
-            if (command.equals("students")) {
+            if (command.equals("list")) {
                 printStudents();
             } else if (command.equals("add")) {
                 inputStudents();
@@ -36,7 +36,7 @@ public class StudentController {
     
     private void printStudents() {
         for (int i = 0; i < students.size(); i++) {
-            Student s = (Student)students.get(i);
+            Student s = students.get(i);
             System.out.printf("%d: %s, %s, %s, %s, %b, %s\n",
                     i,
                     s.getName(), 
@@ -102,7 +102,7 @@ public class StudentController {
             return;
         }
         
-        Student student = (Student)students.get(no);
+        Student student = students.get(no);
         
         System.out.printf("이름: %s\n", student.getName());
         System.out.printf("이메일: %s\n", student.getEmail());
