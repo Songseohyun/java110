@@ -1,10 +1,10 @@
 package bitcamp.java110.cms.control;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 import bitcamp.java110.cms.domain.Teacher;
-import bitcamp.java110.cms.util.LinkedList;
-import bitcamp.java110.cms.util.List;
 
 public class TeacherController {
     private List<Teacher> teachers = new LinkedList<>();

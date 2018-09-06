@@ -1,10 +1,10 @@
 package bitcamp.java110.cms.control;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 import bitcamp.java110.cms.domain.Manager;
-import bitcamp.java110.cms.util.LinkedList;
-import bitcamp.java110.cms.util.List;
 
 public class ManagerController {
     private List<Manager> managers = new LinkedList<>();

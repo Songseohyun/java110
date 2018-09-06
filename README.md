@@ -1,10 +1,17 @@
 # java110-project
 
-## v1.1
+## v1.2
+- 자바 컬렉션 API 사용
+- 직접 제작한 List, ArrayList, LinkedList 대신에 자바에서 제공하는
+Collection API를 사용한다.
 
+## v1.1
 - 인터페이스 적용
+- 의존 객체 주입(Dependency Injection; DI)적용
 - 데이터 목록을 다룰 때 호출하는 메소드의 규칙을 부여한다.
-- 
+    - 다양한 방법으로 구현한 객체를 사용할 수 있다.
+    - 즉 규칙을 따르기만 한다면 어떤 객체라도 대체할 수 있다.
+- 인터페이스의 default 활용
 
 ## v1.0
 
