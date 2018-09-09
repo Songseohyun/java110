@@ -6,27 +6,26 @@ import java.util.Scanner;
 
 import bitcamp.java110.cms.domain.Manager;
 
-public class ManagerController {
+public class ManagerController implements Controller {
     private List<Manager> managers = new LinkedList<>();
-    public Scanner keyIn;
     
-    public ManagerController(Scanner keyIn, List<Manager> managers) {
-        this.keyIn = keyIn;
+    public ManagerController(List<Manager> managers) {
         this.managers = managers;
     }
     
-    public void serviceManagerMenu() {
+    @Override
+    public void service(Scanner keyIn) {
         while (true) {
-            System.out.print("매니저 관리> 추가:add 전체보기:list 삭제:delete 회원보기:detail 나가기:quit ");
+            System.out.print("매니저 관리> 추가:add 전체보기:list 삭제:delete 회원보기:detail 나가기:quit");
             String command = keyIn.nextLine();
             if (command.equals("list")) {
                 printManagers();
             } else if (command.equals("add")) {
-                inputManagers();
+                inputManagers(keyIn);
             } else if (command.equals("delete")) {
-                deleteManager();
+                deleteManager(keyIn);
             } else if (command.equals("detail")) {
-                detailManager();
+                detailManager(keyIn);
             } else if (command.equals("quit")) {
                 break;
             } else {
@@ -34,6 +33,7 @@ public class ManagerController {
             }
         }
     }
+    
     private void printManagers() {
         for (int i = 0; i< managers.size(); i++) {
             Manager manager = managers.get(i);
@@ -46,7 +46,7 @@ public class ManagerController {
                     manager.getPosition());
         }
     }
-    private void inputManagers() {
+    private void inputManagers(Scanner keyIn) {
         while (true) {
             Manager m = new Manager();
             
@@ -74,7 +74,7 @@ public class ManagerController {
         }
     }
     
-    private void deleteManager() {
+    private void deleteManager(Scanner keyIn) {
         System.out.print("삭제할 번호? ");
         int no = Integer.parseInt(keyIn.nextLine());
         
@@ -86,7 +86,7 @@ public class ManagerController {
         System.out.println("삭제하였습니다.");
     }
     
-    private void detailManager() {
+    private void detailManager(Scanner keyIn) {
         System.out.print("조회할 번호? ");
         int no = Integer.parseInt(keyIn.nextLine());
         
