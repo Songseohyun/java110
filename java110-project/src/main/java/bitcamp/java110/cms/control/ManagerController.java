@@ -1,22 +1,21 @@
 package bitcamp.java110.cms.control;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import bitcamp.java110.cms.domain.Manager;
 
-public class ManagerController implements Controller {
-    private List<Manager> managers = new LinkedList<>();
+public class ManagerController implements Controller { 
+
+    public String name = "3";
+    private List<Manager> managers = new ArrayList<>();
     
-    public ManagerController(List<Manager> managers) {
-        this.managers = managers;
-    }
+    //public ManagerController() {}
     
-    @Override
     public void service(Scanner keyIn) {
         while (true) {
-            System.out.print("매니저 관리> 추가:add 전체보기:list 삭제:delete 회원보기:detail 나가기:quit");
+            System.out.print("매니저 관리> ");
             String command = keyIn.nextLine();
             if (command.equals("list")) {
                 printManagers();
@@ -35,17 +34,18 @@ public class ManagerController implements Controller {
     }
     
     private void printManagers() {
-        for (int i = 0; i< managers.size(); i++) {
-            Manager manager = managers.get(i);
-            System.out.printf("%d : %s, %s, %s, %s, %s\n", 
+        for (int i = 0; i < managers.size(); i++) {
+            Manager s = managers.get(i);
+            System.out.printf("%d: %s, %s, %s, %s, %s\n",
                     i,
-                    manager.getName(), 
-                    manager.getEmail(), 
-                    manager.getPassword(), 
-                    manager.getTel(),
-                    manager.getPosition());
+                    s.getName(), 
+                    s.getEmail(), 
+                    s.getPassword(), 
+                    s.getTel(),
+                    s.getPosition());
         }
     }
+    
     private void inputManagers(Scanner keyIn) {
         while (true) {
             Manager m = new Manager();
@@ -82,7 +82,9 @@ public class ManagerController implements Controller {
             System.out.println("무효한 번호입니다.");
             return;
         }
+        
         managers.remove(no);
+        
         System.out.println("삭제하였습니다.");
     }
     
@@ -94,12 +96,13 @@ public class ManagerController implements Controller {
             System.out.println("무효한 번호입니다.");
             return;
         }
-        Manager manager = managers.get(no);
         
-        System.out.printf("이름: %s\n", manager.getName());
-        System.out.printf("이메일: %s\n", manager.getEmail());
-        System.out.printf("암호: %s\n", manager.getPassword());
-        System.out.printf("직위: %s\n", manager.getPosition());
-        System.out.printf("전화: %s\n", manager.getTel());
+        Manager m = managers.get(no);
+        
+        System.out.printf("이름: %s\n", m.getName());
+        System.out.printf("이메일: %s\n", m.getEmail());
+        System.out.printf("암호: %s\n", m.getPassword());
+        System.out.printf("직위: %s\n", m.getPosition());
+        System.out.printf("전화: %s\n", m.getTel());
     }
 }

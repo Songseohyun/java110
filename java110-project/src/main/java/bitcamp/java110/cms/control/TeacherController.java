@@ -1,23 +1,20 @@
 package bitcamp.java110.cms.control;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import bitcamp.java110.cms.domain.Teacher;
 
+// name="2"
 public class TeacherController implements Controller {
-    private List<Teacher> teachers = new LinkedList<>();
     
-    public TeacherController(List<Teacher> teachers) {
-        this.teachers = teachers;
-    }
+    public String name = "2";
+    private List<Teacher> teachers = new ArrayList<>();
     
-    
- 
     public void service(Scanner keyIn) {
         while (true) {
-            System.out.print("강사 관리> 추가:add 전체보기:list 삭제:delete 회원보기:detail 나가기:quit");
+            System.out.print("강사 관리> ");
             String command = keyIn.nextLine();
             if (command.equals("list")) {
                 printTeachers();
@@ -37,15 +34,15 @@ public class TeacherController implements Controller {
     
     private void printTeachers() {
         for (int i = 0; i < teachers.size(); i++) {
-            Teacher teacher = teachers.get(i);
-            System.out.printf("%d : %s, %s, %s, %s, %d, [%s]\n", 
+            Teacher s = teachers.get(i);
+            System.out.printf("%d: %s, %s, %s, %s, %d, [%s]\n",
                     i,
-                    teacher.getName(), 
-                    teacher.getEmail(), 
-                    teacher.getPassword(), 
-                    teacher.getTel(),
-                    teacher.getPay(),
-                    teacher.getSubjects());
+                    s.getName(), 
+                    s.getEmail(), 
+                    s.getPassword(), 
+                    s.getTel(),
+                    s.getPay(),
+                    s.getSubjects());
         }
     }
     
@@ -88,6 +85,7 @@ public class TeacherController implements Controller {
             System.out.println("무효한 번호입니다.");
             return;
         }
+        
         teachers.remove(no);
         
         System.out.println("삭제하였습니다.");
@@ -101,12 +99,14 @@ public class TeacherController implements Controller {
             System.out.println("무효한 번호입니다.");
             return;
         }
-        Teacher teacher = teachers.get(no);
-        System.out.printf("이름: %s\n", teacher.getName());
-        System.out.printf("이메일: %s\n", teacher.getEmail());
-        System.out.printf("암호: %s\n", teacher.getPassword());
-        System.out.printf("전화: %s\n", teacher.getTel());
-        System.out.printf("시급: %d\n", teacher.getPay());
-        System.out.printf("강의과목: %s\n", teacher.getSubjects());
+        
+        Teacher t = teachers.get(no);
+        
+        System.out.printf("이름: %s\n", t.getName());
+        System.out.printf("이메일: %s\n", t.getEmail());
+        System.out.printf("암호: %s\n", t.getPassword());
+        System.out.printf("전화: %s\n", t.getTel());
+        System.out.printf("시급: %d\n", t.getPay());
+        System.out.printf("강의과목: %s\n", t.getSubjects());
     }
 }

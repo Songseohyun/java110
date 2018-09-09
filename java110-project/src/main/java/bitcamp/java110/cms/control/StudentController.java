@@ -1,23 +1,23 @@
 package bitcamp.java110.cms.control;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import bitcamp.java110.cms.domain.Student;
 
 public class StudentController implements Controller {
+
+    public String name = "1";
+    private List<Student> students = new ArrayList<>();
     
-    private List<Student> students = new LinkedList<>(); 
-    
-    public StudentController(List<Student> students) {
-        this.students = students;
+    public StudentController() {
         init();
     }
     
     public void service(Scanner keyIn) {
         while (true) {
-            System.out.print("학생 관리> 추가:add 전체보기:list 삭제:delete 회원보기:detail 나가기:quit");
+            System.out.print("학생 관리> ");
             String command = keyIn.nextLine();
             if (command.equals("list")) {
                 printStudents();
@@ -113,7 +113,7 @@ public class StudentController implements Controller {
         System.out.printf("재직여부: %b\n", student.isWorking());
     }
     
-    private void init(){
+    private void init() {
         Student s = new Student();
         s.setName("a");
         students.add(s);
@@ -135,7 +135,6 @@ public class StudentController implements Controller {
         students.add(s);
     }
 }
-
 
 
 

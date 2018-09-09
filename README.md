@@ -1,5 +1,14 @@
 # java110-project
 
+## v1.4
+- 리플렉션 API 활용
+- File 클래스로 디렉토리 및 파일 다루기
+- 미니 IoC 컨테이너 작성
+
+## v1.3
+- 인터페이스 활용
+- App클래스와 Controller 들 사이의 호출규칙(사용규칙을) 인터페이스로 적용한다.
+
 ## v1.2
 - 자바 컬렉션 API 사용
 - 직접 제작한 List, ArrayList, LinkedList 대신에 자바에서 제공하는
