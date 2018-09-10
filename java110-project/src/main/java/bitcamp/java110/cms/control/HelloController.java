@@ -5,11 +5,11 @@ import java.util.Scanner;
 import bitcamp.java110.cms.annotation.Component;
 import bitcamp.java110.cms.annotation.RequestMapping;
 
-@Component("hello")
+@Component
 public class HelloController{
 
 
-    @RequestMapping
+    @RequestMapping("hello")
     public void hello(Scanner keyIn) {
         System.out.println("안녕하세요!!!");
         
