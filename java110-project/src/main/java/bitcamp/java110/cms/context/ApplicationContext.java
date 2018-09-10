@@ -9,7 +9,6 @@ import org.apache.ibatis.io.Resources;
 
 import bitcamp.java110.cms.annotation.Component;
 
-
 public class ApplicationContext {
     HashMap<String,Object> objPool = new HashMap<>();
     
@@ -23,14 +22,15 @@ public class ApplicationContext {
        
         // 패키지 폴더에 들어 있는 클래스를 찾아 인스턴스를 생성하여 objPool에 보관한다.
         findClass(file, path);
-          
+        
     }
     
     // objPool에 보관된 객체를 이름으로 찾아 리턴한다.
     public Object getBean(String name) {
         return objPool.get(name);
     }
-    public String[] getBeanDefinitinNames() {
+    
+    public String[] getBeanDefinitionNames() {
         Set<String> keySet = objPool.keySet();
         String[] names = new String[keySet.size()];
         keySet.toArray(names);
@@ -61,20 +61,21 @@ public class ApplicationContext {
                     // => 생성자를 가지고 인스턴스를 생성한다.
                     Object instance = constructor.newInstance();
                     
-                    // => 클래스에서 컴포넌트 어노테이션을 추출한다.
+                    // => 클래스에서 Component 애노테이션을 추출한다.
                     Component anno = clazz.getAnnotation(Component.class);
                     
-                    
                     //System.out.println(clazz.getName() + "==> " + name);
-                    // => Component 어노테이션이 value 값이 있으면 그 값으로 객체를 저장
-                    //    없으면, 클래스 이름으로 객체를 저장한다.
-                    if(anno.value().length() > 0) {
                     
-                    // => Component 어노테이션 value 값으로 인스턴스를 objPool에 저장한다.
-                    objPool.put(anno.value(), instance);
-                    }else {
+                    // => Component 애노테이션이 value 값이 있으면 그 값으로 객체를 저장
+                    //    없으면, 클래스 이름으로 객체를 저장한다.
+                    if (anno.value().length() > 0) {
+                        // => Component 애노테이션 value 값으로 인스턴스를 objPool에 저장한다.
+                        objPool.put(anno.value(), instance);
+                    } else {
                         objPool.put(clazz.getName(), instance);
                     }
+                    
+                    
                 } catch (Exception e) {
                     e.printStackTrace();
                     System.out.printf("%s 클래스는 기본 생성자가 없습니다.", 
@@ -86,10 +87,6 @@ public class ApplicationContext {
     
     
 }
-
-
-
-
 
 
 
