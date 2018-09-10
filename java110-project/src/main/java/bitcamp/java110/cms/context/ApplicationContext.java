@@ -8,6 +8,7 @@ import java.util.HashMap;
 import org.apache.ibatis.io.Resources;
 import bitcamp.java110.cms.annotation.Component;
 
+
 public class ApplicationContext {
     HashMap<String,Object> objPool = new HashMap<>();
     
