@@ -2,7 +2,6 @@ package bitcamp.java110.cms.dao.impl;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +24,14 @@ public class ManagerMysqlDao implements ManagerDao {
         this.dataSource = dataSource;
     }
 
-    public int insert(Manager manager) {
+    public int insert(Manager manager) throws DaoException {
         Statement stmt = null;
+        
         Connection con = null;
         
         try {
             con = dataSource.getConnection();
+
             con.setAutoCommit(false);
 
             stmt = con.createStatement();
@@ -53,17 +54,20 @@ public class ManagerMysqlDao implements ManagerDao {
                     + ",'" + manager.getPosition()
                     + "')";
             stmt.executeUpdate(sql2);
+            
             con.commit();
             return 1;
+            
         } catch (Exception e) {
-            try {con.rollback();} catch (Exception e1) {}
+            try {con.rollback();} catch (Exception e2) {}
             throw new DaoException(e);
+            
         } finally {
             try {stmt.close();} catch (Exception e) {}
         }
     }
     
-    public List<Manager> findAll() {
+    public List<Manager> findAll() throws DaoException {
         
         ArrayList<Manager> list = new ArrayList<>();
         
@@ -73,7 +77,9 @@ public class ManagerMysqlDao implements ManagerDao {
         
         try {
             con = dataSource.getConnection();
+            
             stmt = con.createStatement();
+            
             rs = stmt.executeQuery(
                     "select" + 
                     " m.mno," +
@@ -82,6 +88,7 @@ public class ManagerMysqlDao implements ManagerDao {
                     " mr.posi" + 
                     " from p1_mgr mr" + 
                     " inner join p1_memb m on mr.mrno = m.mno");
+            
             while (rs.next()) {
                 Manager mgr = new Manager();
                 mgr.setNo(rs.getInt("mno"));
@@ -93,14 +100,15 @@ public class ManagerMysqlDao implements ManagerDao {
             }
         } catch (Exception e) {
             throw new DaoException(e);
+            
         } finally {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
         }
         return list;
     }
-
-    public Manager findByEmail(String email) {
+    
+    public Manager findByEmail(String email) throws DaoException {
         Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -141,7 +149,7 @@ public class ManagerMysqlDao implements ManagerDao {
         }
     }
     
-    public Manager findByNo(int no) {
+    public Manager findByNo(int no) throws DaoException {
         Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -182,7 +190,7 @@ public class ManagerMysqlDao implements ManagerDao {
         }
     }
     
-    public int delete(int no) {
+    public int delete(int no) throws DaoException {
         Connection con = null;
         Statement stmt = null;
         
@@ -205,7 +213,7 @@ public class ManagerMysqlDao implements ManagerDao {
             return 1;
             
         } catch (Exception e) {
-            try {con.rollback();} catch (SQLException e1) {}
+            try {con.rollback();} catch (Exception e2) {}
             throw new DaoException(e);
             
         } finally {
@@ -213,7 +221,6 @@ public class ManagerMysqlDao implements ManagerDao {
         }
     }
     
-
 }
 
 

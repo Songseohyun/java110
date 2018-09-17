@@ -2,7 +2,6 @@ package bitcamp.java110.cms.dao.impl;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,15 +16,15 @@ import bitcamp.java110.cms.util.DataSource;
 
 @Component
 public class StudentMysqlDao implements StudentDao {
-    
+
     DataSource dataSource;
     
     @Autowired
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
-    
-    public int insert(Student student) {
+
+    public int insert(Student student) throws DaoException {
         Connection con = null;
         Statement stmt = null;
         
@@ -60,7 +59,7 @@ public class StudentMysqlDao implements StudentDao {
             return 1;
             
         } catch (Exception e) {
-            try {con.rollback();} catch (SQLException e1) {}
+            try {con.rollback();} catch (Exception e2) {}
             throw new DaoException(e);
             
         } finally {
@@ -68,7 +67,7 @@ public class StudentMysqlDao implements StudentDao {
         }
     }
     
-    public List<Student> findAll() {
+    public List<Student> findAll() throws DaoException {
         
         ArrayList<Student> list = new ArrayList<>();
         
@@ -110,7 +109,7 @@ public class StudentMysqlDao implements StudentDao {
         return list;
     }
     
-    public Student findByEmail(String email) {
+    public Student findByEmail(String email) throws DaoException {
         Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -152,7 +151,7 @@ public class StudentMysqlDao implements StudentDao {
         }
     }
     
-    public Student findByNo(int no) {
+    public Student findByNo(int no) throws DaoException {
         Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -195,7 +194,7 @@ public class StudentMysqlDao implements StudentDao {
         }
     }
     
-    public int delete(int no) {
+    public int delete(int no) throws DaoException {
         Connection con = null;
         Statement stmt = null;
         
@@ -218,7 +217,7 @@ public class StudentMysqlDao implements StudentDao {
             return 1;
             
         } catch (Exception e) {
-            try {con.rollback();} catch (SQLException e1) {}
+            try {con.rollback();} catch (Exception e2) {}
             throw new DaoException(e);
             
         } finally {

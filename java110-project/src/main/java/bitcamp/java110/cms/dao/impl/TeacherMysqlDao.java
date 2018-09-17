@@ -2,7 +2,6 @@ package bitcamp.java110.cms.dao.impl;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,20 +16,19 @@ import bitcamp.java110.cms.util.DataSource;
 
 @Component
 public class TeacherMysqlDao implements TeacherDao {
-    
+
     DataSource dataSource;
     
     @Autowired
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
-    
-    public int insert(Teacher teacher) {
+
+    public int insert(Teacher teacher) throws DaoException {
         Connection con = null;
         Statement stmt = null;
         
         try {
-
             con = dataSource.getConnection();
             
             con.setAutoCommit(false);
@@ -61,7 +59,7 @@ public class TeacherMysqlDao implements TeacherDao {
             return 1;
             
         } catch (Exception e) {
-            try {con.rollback();} catch (SQLException e1) {}
+            try {con.rollback();} catch (Exception e2) {}
             throw new DaoException(e);
             
         } finally {
@@ -69,7 +67,7 @@ public class TeacherMysqlDao implements TeacherDao {
         }
     }
     
-    public List<Teacher> findAll() {
+    public List<Teacher> findAll() throws DaoException {
         
         ArrayList<Teacher> list = new ArrayList<>();
         
@@ -111,7 +109,7 @@ public class TeacherMysqlDao implements TeacherDao {
         return list;
     }
     
-    public Teacher findByEmail(String email) {
+    public Teacher findByEmail(String email) throws DaoException {
         Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -153,7 +151,7 @@ public class TeacherMysqlDao implements TeacherDao {
         }
     }
     
-    public Teacher findByNo(int no) {
+    public Teacher findByNo(int no) throws DaoException {
         Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -196,7 +194,7 @@ public class TeacherMysqlDao implements TeacherDao {
         }
     }
     
-    public int delete(int no) {
+    public int delete(int no) throws DaoException {
         Connection con = null;
         Statement stmt = null;
         
@@ -219,7 +217,7 @@ public class TeacherMysqlDao implements TeacherDao {
             return 1;
             
         } catch (Exception e) {
-            try {con.rollback();} catch (SQLException e1) {}
+            try {con.rollback();} catch (Exception e2) {}
             throw new DaoException(e);
             
         } finally {
