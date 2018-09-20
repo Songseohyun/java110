@@ -10,7 +10,7 @@ import javax.servlet.annotation.WebListener;
 // tomcat server가 시작되거나 종료되는 상황일 때  실행되는 리스너 만들기
 // Listener를 만들었으면 서블릿 컨테이너에 등록해야한다.
 
-@WebListener
+//@WebListener
 public class Listener01 implements ServletContextListener{
     
     public Listener01() {

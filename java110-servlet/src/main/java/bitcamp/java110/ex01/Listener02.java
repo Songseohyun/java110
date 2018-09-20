@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 // Client로부터 요청이 들어오면 실행되는 리스너
 // Listener를 만들었으면 서블릿 컨테이너에 등록해야한다.
 
-@WebListener
+//@WebListener
 public class Listener02 implements ServletRequestListener{
     
     public Listener02() {
