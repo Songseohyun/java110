@@ -2,33 +2,30 @@ package bitcamp.java110.cms.dao.impl;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import bitcamp.java110.cms.dao.DaoException;
 import bitcamp.java110.cms.dao.StudentDao;
 import bitcamp.java110.cms.domain.Student;
 import bitcamp.java110.cms.util.DataSource;
 
-@Component
 public class StudentMysqlDao implements StudentDao {
-
+    
     DataSource dataSource;
     
-    @Autowired
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
-
-    public int insert(Student student) throws DaoException {
+    
+    public int insert(Student student) throws DaoException{
         Connection con = null;
         Statement stmt = null;
         
         try {
+            
             con = dataSource.getConnection();
             
             con.setAutoCommit(false);
@@ -59,7 +56,7 @@ public class StudentMysqlDao implements StudentDao {
             return 1;
             
         } catch (Exception e) {
-            try {con.rollback();} catch (Exception e2) {}
+            try {con.rollback();} catch (SQLException e2) {}
             throw new DaoException(e);
             
         } finally {
@@ -194,7 +191,7 @@ public class StudentMysqlDao implements StudentDao {
         }
     }
     
-    public int delete(int no) throws DaoException {
+    public int delete(int no) throws DaoException{
         Connection con = null;
         Statement stmt = null;
         
@@ -217,7 +214,7 @@ public class StudentMysqlDao implements StudentDao {
             return 1;
             
         } catch (Exception e) {
-            try {con.rollback();} catch (Exception e2) {}
+            try {con.rollback();} catch (SQLException e2) {}
             throw new DaoException(e);
             
         } finally {
