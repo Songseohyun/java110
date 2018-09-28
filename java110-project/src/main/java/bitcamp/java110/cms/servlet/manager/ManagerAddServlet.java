@@ -32,31 +32,38 @@ public class ManagerAddServlet extends HttpServlet {
         m.setTel(request.getParameter("tel"));
         m.setPosition(request.getParameter("position"));
         
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        
         ManagerDao managerDao = (ManagerDao)this.getServletContext()
                 .getAttribute("managerDao");
         
-        out.println("<!DOCTYPE html>");
-        out.println("<html>");
-        out.println("<head>");
-        out.println("<meta charset='UTF-8'>");
-        out.println("<title>매니저 관리</title>");
-        out.println("</head>");
-        out.println("<body>");
-        out.println("<h1>매니저 등록 결과</h1>");
-        
         try {
-        managerDao.insert(m);
-            out.println("<p>저장하였습니다.</p>");
+            managerDao.insert(m);
+            // 오류 없이 등록에 성공했으면, 목록 페이지를 다시 요청 하라고 
+            // Redirect 명령을 보낸다
+            response.sendRedirect("list");
         } catch(Exception e) {
             e.printStackTrace();
-            out.println("<p>등록중 오류 발생.</p>");
+            // 등록 오류내용을 출력하고 1초가 경과한 후에 목록 페이지를 요청하도록
+            // Refresh 명령을 설정한다
+            // => 응답할 때 응답 헤더로 웹브라우저에게 알린다.
+            response.setHeader("Refresh", "2;url=list");
+            
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<meta charset='UTF-8'>");
+            out.println("<title>매니저 관리</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>매니저 등록 오류</h1>");
+            out.printf("<p>%s</p>\n", e.getMessage());
+            out.println("<p>Wait please...</p>");
+            out.println("</body>");
+            out.println("</html>");
         }
     
-    out.println("</body>");
-    out.println("</html>");
     }
 }
     

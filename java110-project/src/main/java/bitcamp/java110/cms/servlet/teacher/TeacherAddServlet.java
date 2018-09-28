@@ -31,29 +31,34 @@ public class TeacherAddServlet extends HttpServlet {
         m.setPay(Integer.parseInt(request.getParameter("pay")));
         m.setSubjects(request.getParameter("subjects"));
         
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
         
         TeacherDao teacherDao = (TeacherDao)this.getServletContext()
                 .getAttribute("teacherDao");
         
-        out.println("<!DOCTYPE html>");
-        out.println("<html>");
-        out.println("<head>");
-        out.println("<meta charset='UTF-8'>");
-        out.println("<title>강사 관리</title>");
-        out.println("</head>");
-        out.println("<body>");
-        out.println("<h1>강사 등록 결과</h1>");
         
-        try {teacherDao.insert(m);
-            out.println("저장하였습니다.");
+        try {
+            teacherDao.insert(m);
+            response.sendRedirect("list");
         } catch(Exception e) {
             e.printStackTrace();
-            out.println("같은 이메일의 강사가 존재합니다.");
+            response.setHeader("Refresh", "1;url=list");
+            
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<meta charset='UTF-8'>");
+            out.println("<title>강사 관리</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>강사 등록 오류</h1>");
+            out.printf("<p>%s</p>\n", e.getMessage());
+            out.println("<p>Wait please...</p>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        out.println("</body>");
-        out.println("</html>");
     }
 
 }
