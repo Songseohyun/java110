@@ -1,7 +1,6 @@
 package bitcamp.java110.cms.servlet.manager;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,32 +21,23 @@ public class ManagerDeleteServlet extends HttpServlet {
             throws ServletException, IOException {
         
         int no = Integer.parseInt(request.getParameter("no"));
+        
+        
         ManagerDao managerDao = (ManagerDao)this.getServletContext()
                 .getAttribute("managerDao");
+        
         try {
             managerDao.delete(no);
             response.sendRedirect("list");
-        } catch(Exception e) {
-            e.printStackTrace();
             
-            response.setHeader("Refresh", "1;url=list");
+        } catch (Exception e) {
+            request.setAttribute("error", e);
+            request.setAttribute("message", "매니저 삭제 오류!");
+            request.setAttribute("refresh", "3;url=list");
             
-            response.setContentType("text/html;charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<meta charset='UTF-8'>");
-            out.println("<title>매니저 관리</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>매니저 삭제 오류</h1>");
-            out.printf("<p>%s</p>\n", e.getMessage());
-            out.println("<p>Wait please...</p>");
-            out.println("</body>");
-            out.println("</html>");
+            request.getRequestDispatcher("/error").forward(request, response);
         }
+        
     }
     
 }

@@ -1,7 +1,6 @@
 package bitcamp.java110.cms.servlet.teacher;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,42 +22,30 @@ public class TeacherAddServlet extends HttpServlet {
             throws ServletException, IOException {
         
         request.setCharacterEncoding("UTF-8");
-        Teacher m = new Teacher();
-        m.setName(request.getParameter("name"));
-        m.setEmail(request.getParameter("email"));
-        m.setPassword(request.getParameter("password"));
-        m.setTel(request.getParameter("tel"));
-        m.setPay(Integer.parseInt(request.getParameter("pay")));
-        m.setSubjects(request.getParameter("subjects"));
         
+        Teacher t = new Teacher();
+        t.setName(request.getParameter("name"));
+        t.setEmail(request.getParameter("email"));
+        t.setPassword(request.getParameter("password"));
+        t.setTel(request.getParameter("tel"));
+        t.setPay(Integer.parseInt(request.getParameter("pay")));
+        t.setSubjects(request.getParameter("subjects"));
         
         TeacherDao teacherDao = (TeacherDao)this.getServletContext()
                 .getAttribute("teacherDao");
         
-        
         try {
-            teacherDao.insert(m);
+            teacherDao.insert(t);
             response.sendRedirect("list");
+            
         } catch(Exception e) {
-            e.printStackTrace();
-            response.setHeader("Refresh", "1;url=list");
+            request.setAttribute("error", e);
+            request.setAttribute("message", "강사 등록 오류!");
+            request.setAttribute("refresh", "3;url=list");
             
-            response.setContentType("text/html;charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<meta charset='UTF-8'>");
-            out.println("<title>강사 관리</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>강사 등록 오류</h1>");
-            out.printf("<p>%s</p>\n", e.getMessage());
-            out.println("<p>Wait please...</p>");
-            out.println("</body>");
-            out.println("</html>");
+            request.getRequestDispatcher("/error").forward(request, response);
         }
+        
     }
 
 }
