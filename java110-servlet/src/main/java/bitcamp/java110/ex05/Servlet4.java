@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 // MyHttpServlet2 클래스를 상속 받으면 
 // GET/POST 요청을 구분 하여 처리 할 수 있다
 
-@WebServlet("/ex05/servlet04")
+@WebServlet("/ex05/servlet4")
 public class Servlet4 extends  HttpServlet{
     private static final long serialVersionUID = 1L;
 

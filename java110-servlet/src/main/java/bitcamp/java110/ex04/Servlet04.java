@@ -18,7 +18,7 @@ import javax.servlet.http.Part;
 
 // Servlet API 3.0 부터 제공하는 멀티파트 처리기를 이용하기
 // => 서블릿 선언부에 멀티파트 데이터를 처리함을 지정한다.
-@MultipartConfig(maxFileSize=10_000_000) //
+@MultipartConfig(maxFileSize=10_000_000)
 @WebServlet("/ex04/servlet04")
 public class Servlet04 extends GenericServlet {
     private static final long serialVersionUID = 1L;
@@ -44,6 +44,7 @@ public class Servlet04 extends GenericServlet {
             part.write(this.getServletContext()
                        .getRealPath("/upload/" + file1name));
         }
+        
         String file2name = "";
         part = httpReq.getPart("file2");
         if (part.getSize() > 0) {
