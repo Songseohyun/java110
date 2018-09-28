@@ -33,6 +33,8 @@
 
     <!--  
     <request-character-encoding>UTF-8</request-character-encoding>
+    다음태그가 안될시 
+    request.setCharacterEncoding() 이용
     -->
     <!--  Listener 배치하기 -->    
     <listener>
