@@ -13,13 +13,19 @@ import bitcamp.java110.cms.util.DataSource;
 public class ContextLoaderListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+<<<<<<< HEAD
         System.out.println("ContextLoaderListener.contextInitialized() 실행!");
         
+=======
+        System.out.println("ContextLoaderListner.init() 실행!");
+
+>>>>>>> 4b2bd7d49cb557ed277fec29981b70ca37abaa28
         ServletContext sc = sce.getServletContext();
 
         // DAO가 사용할 DB 커넥션풀 객체 준비
         // => DataSource 객체를 만들 때 컨텍스트 파라미터 값을 꺼내서 사용한다.
         try {
+<<<<<<< HEAD
             DataSource dataSource = new DataSource(
                     sc.getInitParameter("jdbc.driver"),
                     sc.getInitParameter("jdbc.url"),
@@ -36,13 +42,36 @@ public class ContextLoaderListener implements ServletContextListener {
             TeacherMysqlDao teacherDao = new TeacherMysqlDao();
             teacherDao.setDataSource(dataSource);
             
+=======
+            DataSource dataSource = new DataSource(sc.getInitParameter("jdbc.driver"), sc.getInitParameter("jdbc.url"),
+                    sc.getInitParameter("jdbc.username"), sc.getInitParameter("jdbc.password"));
+
+            // DAO 객체 생성 및 DB 커네션풀 주입하기
+            ManagerMysqlDao managerDao = new ManagerMysqlDao();
+            managerDao.setDataSource(dataSource);
+
+            StudentMysqlDao studentDao = new StudentMysqlDao();
+            studentDao.setDataSource(dataSource);
+
+            TeacherMysqlDao teacherDao = new TeacherMysqlDao();
+            teacherDao.setDataSource(dataSource);
+
+>>>>>>> 4b2bd7d49cb557ed277fec29981b70ca37abaa28
             // 서블릿에서 DAO를 이용할 수 있도록 ServletContext 보관소에 저장하기
             sc.setAttribute("managerDao", managerDao);
             sc.setAttribute("studentDao", studentDao);
             sc.setAttribute("teacherDao", teacherDao);
+<<<<<<< HEAD
             
         } catch (Exception e) {
             e.printStackTrace();
         }
+=======
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+>>>>>>> 4b2bd7d49cb557ed277fec29981b70ca37abaa28
     }
 }

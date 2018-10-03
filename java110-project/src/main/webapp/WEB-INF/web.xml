@@ -29,6 +29,7 @@
         <param-name>jdbc.password</param-name>
         <param-value>1111</param-value>
     </context-param>
+<<<<<<< HEAD
     
     <!--
        다음 태그가 지원이 안되는 경우,
@@ -37,11 +38,24 @@
     -->
     
     <!-- 리스너 배치하기 -->
+=======
+
+
+    <!--  
+    <request-character-encoding>UTF-8</request-character-encoding>
+    다음태그가 안될시 
+    request.setCharacterEncoding() 이용
+    -->
+    <!--  Listener 배치하기 -->    
+>>>>>>> 4b2bd7d49cb557ed277fec29981b70ca37abaa28
     <listener>
         <listener-class>bitcamp.java110.cms.listener.ContextLoaderListener</listener-class>
     </listener>
     
+<<<<<<< HEAD
     
+=======
+>>>>>>> 4b2bd7d49cb557ed277fec29981b70ca37abaa28
     <!-- 클라이언트가 요청한 URL에 대해 기본 파일을 찾을 때 우선 순위 -->
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
@@ -49,6 +63,7 @@
     </welcome-file-list>
 
 </web-app>
+<<<<<<< HEAD
 
 
 
@@ -59,3 +74,5 @@
 
 
 
+=======
+>>>>>>> 4b2bd7d49cb557ed277fec29981b70ca37abaa28

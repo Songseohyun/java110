@@ -6,15 +6,24 @@ header {
 }
 
 header > h1 {
+<<<<<<< HEAD
     margin: 0px;
     float: left;
     background: url('http://bitcamp.co.kr/img/logo2.jpg') no-repeat -25px 50%;
     background-size: contain; 
     height: 0;
+=======
+	margin: 0px;
+	float: left;
+    background: url('http://bitcamp.co.kr/img/logo2.jpg') no-repeat -26px 50%;
+    background-size: contain;
+    height:0;
+>>>>>>> 4b2bd7d49cb557ed277fec29981b70ca37abaa28
     padding-top: 40px;
     overflow: hidden;
 }
 
+<<<<<<< HEAD
 header ul {
     float: right;
 }
@@ -57,3 +66,21 @@ footer > p {
 
 
 
+=======
+li {
+	float: right;
+	list-style: none;
+	display: inline-block;
+	margin: 0px 6px;
+}
+
+footer{
+	background-color: aqua;
+	color: black;
+}
+
+footer > p {
+	padding: 8px;
+	text-align: center;
+}
+>>>>>>> 4b2bd7d49cb557ed277fec29981b70ca37abaa28

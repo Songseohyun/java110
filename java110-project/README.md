@@ -1,5 +1,80 @@
 # java110-project
 
+
+## v4.6
+
+- 쿠키 적용하기
+- 작업
+    - 로그인 폼을 작성한다.
+    - 아이디 저장 기능을 쿠키로 구현한다.
+    
+
+
+## v4.5 v4.5.1
+
+- 포워드, 인클루드 적용하기
+- 작업 
+    - 여러 서블릿에서 공통으로 수행하는 작업을 별도의 서블릿을 분리한다.
+    - 그 서블릿으로 포워드를 수행한다.
+    - 예) ErrorServlet 클랫스 생성하고 포워드를 적용한다.
+    - 예2) HeadServlet, FooterServlet 클래스를 생성하고 인클루드를 적용한다.
+
+## v4.4
+
+- Refresh, Redirect 적용
+- 작업
+    - 등록, 삭제한 후에 목록 페이지를 자동으로 요청하도록 Refresh 적용
+
+## v4.3
+
+- HTML 출력하기
+- 작업
+    - 서블릿의 출력 콘텐트를 일반 텍스트에서 HTML로 바꾼다.
+
+## v4.2
+
+- Listener를 이용하여 공용 자원을 준비하기
+- 작업
+    - ContextLoaderListener 클래스 생성
+    - 이 Listener에서 DAO 준비하기
+
+## v4.1
+
+- 서블릿의 loadOnStartup 배치 속성을 이용하여 공용 자원을 준비하기
+- ServletContext를 이용하여 공용자원을 공유하기
+- 작업
+    - InitServlet 클래스 생성 
+    - InitServlet에서 DAO와 DataSource 준비하기
+    - ServletContext에 DAO 보관하기
+
+## v4.0
+
+- 서블릿 기술을 적용하여 서버 애플리케이션 만들기
+- 작업
+    - 클라이언트 요청을 처리하는 컨트롤러를 서블릿으로 전환한다.
+
+## v3.1 
+
+- 웹서버를 중계 서버로 사용하기
+- 서블릿 컨테이너 적용
+    - 톰캣 서버 설치
+    - build.gradle 에 servlet-api 라이브러리 추가 
+
+
+## v3.0
+
+- 웹브라우저를 클라이언트로 사용하기
+- 서버에 HTTP 프로토콜을 처리하는 기능 추가
+- ServerApp 클래스를 HTTP 프로토콜 요청과 응답을 처리하는 방식으로 변경한다.
+
+## v2.9 
+
+- Command 패턴으로 분할된 메서드를 한 클래스로 합치기
+- 관련된 컨트롤러 클래스를 한 클래스로 만든다.
+    - ManagerListController, ManagerAddController, ManagerDetailController, ManagerDeleteController 클래스를 ManagerController 클래스로 합친다.
+    - 학생 관리와 강사 관리도 마찬가지이다.
+    - 각각의 컨트롤러가 크지 않을 때는 관리하기 쉽게 한 클래스로 합치기도 한다.
+
 ## v2.8 (Stateless)
 
 - 멀티스레드 적용하기(Connection-Oriented에서 Stateless 방식으로 요청 처리)

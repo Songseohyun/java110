@@ -3,16 +3,23 @@ package bitcamp.java110.cms.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+<<<<<<< HEAD
+=======
+import javax.servlet.ServletContext;
+>>>>>>> 4b2bd7d49cb557ed277fec29981b70ca37abaa28
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+<<<<<<< HEAD
 import javax.servlet.http.HttpSession;
 
 import bitcamp.java110.cms.domain.Manager;
 import bitcamp.java110.cms.domain.Member;
 import bitcamp.java110.cms.domain.Teacher;
+=======
+>>>>>>> 4b2bd7d49cb557ed277fec29981b70ca37abaa28
 
 @WebServlet("/header")
 public class HeaderServlet extends HttpServlet {
@@ -24,6 +31,7 @@ public class HeaderServlet extends HttpServlet {
             HttpServletResponse response) throws ServletException, IOException {
         
         PrintWriter out = response.getWriter();
+<<<<<<< HEAD
         
         out.println("<header>");
         out.println("    <h1>비트캠프</h1>");
@@ -49,6 +57,15 @@ public class HeaderServlet extends HttpServlet {
         out.println("        <li><a href='/teacher/list'>강사관리</a></li>");
         out.println("        <li><a href='/manager/list'>매니저관리</a></li>");
         out.println("    </ul>");
+=======
+        out.println("<header>");
+        out.println("   <h1>비트캠프</h1>");
+        out.println("       <ul>");
+        out.println("           <li><a href='/student/list'>학생 관리</a></li>");
+        out.println("           <li><a href='/teacher/list'>강사 관리</a></li>");
+        out.println("           <li><a href='/manager/list'>매니저 관리</a></li>");
+        out.println("       </ul>");
+>>>>>>> 4b2bd7d49cb557ed277fec29981b70ca37abaa28
         out.println("</header>");
     }
 }
