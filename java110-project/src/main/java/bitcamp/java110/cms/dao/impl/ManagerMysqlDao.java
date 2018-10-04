@@ -199,7 +199,7 @@ public class ManagerMysqlDao implements ManagerDao {
             int count = stmt.executeUpdate(sql);
             
             if (count == 0)
-                return 0;
+                throw new Exception("일치하는 번호가 없습니다.");
             
             String sql2 = "delete from p1_memb where mno=" + no;
             stmt.executeUpdate(sql2);
@@ -215,9 +215,9 @@ public class ManagerMysqlDao implements ManagerDao {
             try {stmt.close();} catch (Exception e) {}
         }
     }
+    
     @Override
-    public Manager findByEmailPassword
-        (String email, String password) throws DaoException {
+    public Manager findByEmailPassword(String email, String password) throws DaoException {
         Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -236,8 +236,8 @@ public class ManagerMysqlDao implements ManagerDao {
                     " from p1_mgr mr" + 
                     " inner join p1_memb m on mr.mrno = m.mno" +
                     " where m.email='" + email + 
-                    "' and m.pwd=password('"+password
-                    + "')");
+                    "' and m.pwd=password('" + password +
+                    "')");
             
             if (rs.next()) {
                 Manager mgr = new Manager();
@@ -259,7 +259,6 @@ public class ManagerMysqlDao implements ManagerDao {
             try {stmt.close();} catch (Exception e) {}
         }
     }
-    
     
 }
 
