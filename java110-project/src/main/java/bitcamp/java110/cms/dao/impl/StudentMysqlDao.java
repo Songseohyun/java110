@@ -232,17 +232,17 @@ public class StudentMysqlDao implements StudentDao {
             stmt = con.createStatement();
             rs = stmt.executeQuery(
                     "select" + 
-                            " m.mno," +
-                            " m.name," + 
-                            " m.email," + 
-                            " m.tel," + 
-                            " s.schl," +
-                            " s.work" + 
-                            " from p1_stud s" + 
-                            " inner join p1_memb m on s.sno = m.mno" +
-                            " where m.email='" + email + 
-                            "' and m.pwd=password('"+password
-                            + "')");
+                    " m.mno," +
+                    " m.name," + 
+                    " m.email," + 
+                    " m.tel," + 
+                    " s.schl," +
+                    " s.work" + 
+                    " from p1_stud s" + 
+                    " inner join p1_memb m on s.sno = m.mno" +
+                    " where m.email='" + email + 
+                    "' and m.pwd=password('" + password +
+                    "')");
             
             if (rs.next()) {
                 Student s = new Student();
@@ -252,6 +252,7 @@ public class StudentMysqlDao implements StudentDao {
                 s.setTel(rs.getString("tel"));
                 s.setSchool(rs.getString("schl"));
                 s.setWorking(rs.getString("work").equals("Y") ? true : false);
+                
                 
                 return s;
             }

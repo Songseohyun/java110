@@ -48,6 +48,7 @@ public class TeacherListServlet extends HttpServlet {
         
         RequestDispatcher rd = request.getRequestDispatcher("/header");
         rd.include(request, response);
+        
         out.println("<h1>강사 목록</h1>");
         
         out.println("<p><a href='form.html'>추가</a></p>");

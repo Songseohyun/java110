@@ -47,8 +47,10 @@ public class StudentDetailServlet extends HttpServlet {
         out.println("</style>");
         out.println("</head>");
         out.println("<body>");
+        
         RequestDispatcher rd = request.getRequestDispatcher("/header");
         rd.include(request, response);
+        
         out.println("<h1>학생 상세정보</h1>");
         
         if (s == null) {
@@ -74,6 +76,7 @@ public class StudentDetailServlet extends HttpServlet {
         out.printf("    location.href = 'delete?no=%d'\n", s.getNo());
         out.println("}");
         out.println("</script>");
+        
         rd = request.getRequestDispatcher("/footer");
         rd.include(request, response);
         

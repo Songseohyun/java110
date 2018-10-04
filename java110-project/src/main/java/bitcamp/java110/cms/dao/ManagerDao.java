@@ -10,5 +10,5 @@ public interface ManagerDao {
     Manager findByEmail(String email);
     Manager findByNo(int no);
     int delete(int no);
-    Manager findByEmailPassword(String email, String password) throws DaoException;
+    Manager findByEmailPassword(String email, String password);
 }

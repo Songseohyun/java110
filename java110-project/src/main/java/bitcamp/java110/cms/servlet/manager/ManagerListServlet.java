@@ -49,6 +49,7 @@ public class ManagerListServlet extends HttpServlet {
         // 페이지 머리말 포함하기
         RequestDispatcher rd = request.getRequestDispatcher("/header");
         rd.include(request, response);
+        
         out.println("<h1>매니저 목록</h1>");
         
         out.println("<p><a href='form.html'>추가</a></p>");
@@ -72,9 +73,10 @@ public class ManagerListServlet extends HttpServlet {
         out.println("</tbody>");
         out.println("</table>");
         
-     // 페이지 꼬리 포함하기
+        // 페이지 꼬리말 포함하기
         rd = request.getRequestDispatcher("/footer");
         rd.include(request, response);
+        
         out.println("</body>");
         out.println("</html>");
     }

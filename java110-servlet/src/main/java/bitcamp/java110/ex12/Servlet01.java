@@ -1,4 +1,16 @@
-package bitcamp.java110.cms.servlet.auth;
+// JSP 사용 전 - 로그인 폼 출력하기
+// => 개발자가 직접 HTML 출력 코드를 작성해야 한다.
+//
+// JSP 
+// => 개발자를 대신하여 서블릿 클래스를 정의하고,
+//    자바 출력 코드를 작성한다.
+// => 구동 원리
+//    hello.jsp ===> [JSP 엔진] ===> hello_jsp.java 생성
+//    - 생성된 자바 클래스는 HttpServlet 클래스의 하위 클래스이다.
+//    - 클래스 이름은 JSP 엔진에 따라 다를 수 있다.
+//    - JSP 파일을 직접 실행하는 것이 아니다.
+//
+package bitcamp.java110.ex12;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,15 +21,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import bitcamp.java110.cms.dao.ManagerDao;
-import bitcamp.java110.cms.dao.StudentDao;
-import bitcamp.java110.cms.dao.TeacherDao;
-import bitcamp.java110.cms.domain.Member;
-
-@WebServlet("/auth/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/ex12/servlet01")
+public class Servlet01 extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -36,6 +42,14 @@ public class LoginServlet extends HttpServlet {
                     break;
                 }
             }
+        }
+        
+        if (email == "") { // email 쿠키가 없다면,
+            // 다음 요청할 때 이메일 쿠키를 받을 수 있도록 
+            // 테스트 용 쿠키를 웹브라우저에게 보낸다.
+            Cookie cookie = new Cookie("email", "hongkildong");
+            cookie.setPath("/");
+            response.addCookie(cookie);
         }
         
         response.setContentType("text/html;charset=UTF-8");
@@ -85,63 +99,7 @@ public class LoginServlet extends HttpServlet {
         out.println("</body>");
         out.println("</html>");
     }
-    
-    @Override
-    protected void doPost(
-            HttpServletRequest request, 
-            HttpServletResponse response) 
-                    throws ServletException, IOException {
-
-        String type = request.getParameter("type");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String save = request.getParameter("save");
-        
-        
-        if (save != null) {// 이메일 저장하기를 체크했다면,
-            Cookie cookie = new Cookie("email", email);
-            cookie.setMaxAge(60 * 60 * 24 * 15);
-            response.addCookie(cookie);
-        } else {// 이메일을 저장하고 싶지 않다면,
-            Cookie cookie = new Cookie("email", "");
-            cookie.setMaxAge(0);
-            response.addCookie(cookie);
-        }
-        
-        Member loginUser = null;
-        
-        if (type.equals("manager")) {
-            ManagerDao managerDao = (ManagerDao)this.getServletContext()
-                    .getAttribute("managerDao");
-            loginUser = managerDao.findByEmailPassword(email, password);
-            
-        } else if (type.equals("student")) {
-            StudentDao studentDao = (StudentDao)this.getServletContext()
-                    .getAttribute("studentDao");
-            loginUser = studentDao.findByEmailPassword(email, password);
-            
-        } else if (type.equals("teacher")) {
-            TeacherDao teacherDao = (TeacherDao)this.getServletContext()
-                    .getAttribute("teacherDao");
-            loginUser = teacherDao.findByEmailPassword(email, password);
-        }
-        
-        HttpSession session = request.getSession();
-        if (loginUser != null) {
-            // 회원 정보를 세션에 보관한다.
-            session.setAttribute("loginUser", loginUser);
-            
-            response.sendRedirect("../student/list");
-        } else {
-            // 로그인 된 상태에서 다른 사용자로 로그인을 시도하다가 
-            // 실패한다면 무조건 세션을 무효화시킨다.
-            session.invalidate();
-
-            response.sendRedirect("login");
-        }
-    }
 }
-
 
 
 

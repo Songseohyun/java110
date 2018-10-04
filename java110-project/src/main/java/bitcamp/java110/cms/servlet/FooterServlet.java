@@ -19,8 +19,9 @@ public class FooterServlet extends HttpServlet {
             HttpServletResponse response) throws ServletException, IOException {
         
         PrintWriter out = response.getWriter();
+        
         out.println("<footer>");
-        out.println("   <p>&copy;자바110기</p>");
+        out.println("    <p>&copy;자바110기</p>");
         out.println("</footer>");
     }
 }

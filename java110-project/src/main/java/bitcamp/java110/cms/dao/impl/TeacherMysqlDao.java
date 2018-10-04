@@ -221,8 +221,7 @@ public class TeacherMysqlDao implements TeacherDao {
     }
     
     @Override
-    public Teacher findByEmailPassword
-    (String email, String password) throws DaoException {
+    public Teacher findByEmailPassword(String email, String password) throws DaoException {
         Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -233,17 +232,17 @@ public class TeacherMysqlDao implements TeacherDao {
             stmt = con.createStatement();
             rs = stmt.executeQuery(
                     "select" + 
-                            " m.mno," +
-                            " m.name," + 
-                            " m.email," + 
-                            " m.tel," + 
-                            " t.hrpay," +
-                            " t.subj" +
-                            " from p1_tchr t" + 
-                            " inner join p1_memb m on t.tno = m.mno" +
-                            " where m.email='" + email + 
-                            "' and m.pwd=password('"+password
-                            + "')");
+                    " m.mno," +
+                    " m.name," + 
+                    " m.email," + 
+                    " m.tel," + 
+                    " t.hrpay," +
+                    " t.subj" +
+                    " from p1_tchr t" + 
+                    " inner join p1_memb m on t.tno = m.mno" +
+                    " where m.email='" + email + 
+                    "' and m.pwd=password('" + password +
+                    "')");
             
             if (rs.next()) {
                 Teacher t = new Teacher();

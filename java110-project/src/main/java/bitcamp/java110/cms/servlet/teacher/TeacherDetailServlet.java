@@ -46,9 +46,10 @@ public class TeacherDetailServlet extends HttpServlet {
         out.println("</style>");
         out.println("</head>");
         out.println("<body>");
-
+        
         RequestDispatcher rd = request.getRequestDispatcher("/header");
         rd.include(request, response);
+        
         out.println("<h1>강사 상세정보</h1>");
         
         if (t == null) {
@@ -77,6 +78,7 @@ public class TeacherDetailServlet extends HttpServlet {
         
         rd = request.getRequestDispatcher("/footer");
         rd.include(request, response);
+        
         out.println("</body>");
         out.println("</html>");
     }

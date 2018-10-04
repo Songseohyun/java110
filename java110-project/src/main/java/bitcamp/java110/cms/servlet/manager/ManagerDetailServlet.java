@@ -45,8 +45,10 @@ public class ManagerDetailServlet extends HttpServlet {
         out.println("</style>");
         out.println("</head>");
         out.println("<body>");
+        
         RequestDispatcher rd = request.getRequestDispatcher("/header");
         rd.include(request, response);
+        
         out.println("<h1>매니저 상세정보</h1>");
         
         if (m == null) {
@@ -72,8 +74,9 @@ public class ManagerDetailServlet extends HttpServlet {
         out.println("}");
         out.println("</script>");
         
-        rd = request.getRequestDispatcher("/header");
+        rd = request.getRequestDispatcher("/footer");
         rd.include(request, response);
+        
         out.println("</body>");
         out.println("</html>");
     }

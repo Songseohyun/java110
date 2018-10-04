@@ -48,6 +48,7 @@ public class StudentListServlet extends HttpServlet {
         
         RequestDispatcher rd = request.getRequestDispatcher("/header");
         rd.include(request, response);
+        
         out.println("<h1>학생 목록</h1>");
         
         out.println("<p><a href='form.html'>추가</a></p>");
@@ -74,9 +75,9 @@ public class StudentListServlet extends HttpServlet {
         out.println("</tbody>");
         out.println("</table>");
         
-     // 페이지 꼬리 포함하기
         rd = request.getRequestDispatcher("/footer");
         rd.include(request, response);
+        
         out.println("</body>");
         out.println("</html>");
     }
