@@ -1,5 +1,10 @@
 # java110-project
 
+## v5.0
+
+-Jsp 액션 태그 적용
+- list,jsp, detail.jsp에 JSP 액션 태그를 적용.
+
 ## v4.9
 
 - JSP를 활용한 MVC 모델 1 타입 적용

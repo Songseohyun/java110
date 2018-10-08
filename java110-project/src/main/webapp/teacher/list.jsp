@@ -21,6 +21,13 @@ table, th, td {
 <jsp:include page="../header.jsp"></jsp:include>
 
 <h1>강사 목록(MVC)</h1>
+
+<jsp:useBean 
+    scope="request"
+    id="list"
+    class="java.util.ArrayList"
+    type="java.util.List<Teacher>"
+/>
 <p><a href='add'>추가</a></p>
 <table>
 <thead>
@@ -30,7 +37,6 @@ table, th, td {
 </thead>
 <tbody>
 <%
-List<Teacher> list = (List<Teacher>) request.getAttribute("list");
 for (Teacher t : list) {
 %>
 <tr>
