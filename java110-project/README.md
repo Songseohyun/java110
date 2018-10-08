@@ -1,5 +1,9 @@
 # java110-project
 
+## v5.1
+-el(Expression Language) 적용
+-작업 
+    - jsp 파일에 EL 문법을 적용한다.
 ## v5.0
 
 -Jsp 액션 태그 적용
