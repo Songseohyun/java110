@@ -119,9 +119,11 @@ public class TeacherMysqlDao implements TeacherDao {
                     " m.name," + 
                     " m.email," + 
                     " t.hrpay," +
-                    " t.subj" +
+                    " t.subj," +
+                    " mp.photo" +
                     " from p1_tchr t" + 
                     " inner join p1_memb m on t.tno = m.mno" +
+                    " left outer join p1_memb_phot mp on t.tno=mp.mno "+
                     " where m.email='" + email + "'");
             
             if (rs.next()) {
@@ -132,6 +134,7 @@ public class TeacherMysqlDao implements TeacherDao {
                 t.setTel(rs.getString("tel"));
                 t.setPay(rs.getInt("hrpay"));
                 t.setSubjects(rs.getString("subj"));
+                t.setPhoto(rs.getString("photo"));
                 
                 return t;
             }
@@ -162,9 +165,11 @@ public class TeacherMysqlDao implements TeacherDao {
                     " m.email," + 
                     " m.tel," + 
                     " t.hrpay," +
-                    " t.subj" +
+                    " t.subj," +
+                    " mp.photo" +
                     " from p1_tchr t" + 
                     " inner join p1_memb m on t.tno = m.mno" +
+                    " left outer join p1_memb_phot mp on t.tno=mp.mno "+
                     " where m.mno=" + no);
             
             if (rs.next()) {
@@ -175,6 +180,7 @@ public class TeacherMysqlDao implements TeacherDao {
                 t.setTel(rs.getString("tel"));
                 t.setPay(rs.getInt("hrpay"));
                 t.setSubjects(rs.getString("subj"));
+                t.setPhoto(rs.getString("photo"));
                 
                 return t;
             }
