@@ -26,18 +26,20 @@ public class TeacherMysqlDao implements TeacherDao {
         try {
             con = dataSource.getConnection();
             stmt = con.createStatement();
-            String sql2 = "insert into p1_tchr(tno,hrpay,subj)"
+            
+            String sql = "insert into p1_tchr(tno,hrpay,subj)"
                     + " values(" + teacher.getNo()
                     + "," + teacher.getPay()
                     + ",'" + teacher.getSubjects()
                     + "')";
-            return stmt.executeUpdate(sql2);
+            return stmt.executeUpdate(sql);
             
         } catch (Exception e) {
             throw new DaoException(e);
             
         } finally {
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
     
@@ -79,6 +81,7 @@ public class TeacherMysqlDao implements TeacherDao {
         } finally {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
         return list;
     }
@@ -98,11 +101,10 @@ public class TeacherMysqlDao implements TeacherDao {
                     " m.name," + 
                     " m.email," + 
                     " t.hrpay," +
-                    " t.subj," +
                     " mp.photo" +
                     " from p1_tchr t" + 
                     " inner join p1_memb m on t.tno = m.mno" +
-                    " left outer join p1_memb_phot mp on t.tno=mp.mno "+
+                    " left outer join p1_memb_phot mp on t.tno = mp.mno" +
                     " where m.email='" + email + "'");
             
             if (rs.next()) {
@@ -125,6 +127,7 @@ public class TeacherMysqlDao implements TeacherDao {
         } finally {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
     
@@ -148,7 +151,7 @@ public class TeacherMysqlDao implements TeacherDao {
                     " mp.photo" +
                     " from p1_tchr t" + 
                     " inner join p1_memb m on t.tno = m.mno" +
-                    " left outer join p1_memb_phot mp on t.tno=mp.mno "+
+                    " left outer join p1_memb_phot mp on t.tno = mp.mno" +
                     " where m.mno=" + no);
             
             if (rs.next()) {
@@ -171,6 +174,7 @@ public class TeacherMysqlDao implements TeacherDao {
         } finally {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
     
@@ -190,6 +194,7 @@ public class TeacherMysqlDao implements TeacherDao {
             
         } finally {
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
     
@@ -236,6 +241,7 @@ public class TeacherMysqlDao implements TeacherDao {
         } finally {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
 }

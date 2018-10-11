@@ -15,7 +15,7 @@ import javax.servlet.http.Part;
 import bitcamp.java110.cms.domain.Student;
 import bitcamp.java110.cms.service.StudentService;
 
-@MultipartConfig(maxFileSize=10_000_000)
+@MultipartConfig(maxFileSize=2_000_000)
 @WebServlet("/student/add")
 public class StudentAddServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -53,16 +53,16 @@ public class StudentAddServlet extends HttpServlet {
         StudentService studentService = (StudentService)this.getServletContext()
                 .getAttribute("studentService");
         
-        
-         try {
-                // 사진 데이터 처리
-                Part part = request.getPart("file1");
-                if (part.getSize() > 0) {
-                    String filename = UUID.randomUUID().toString();
-                    part.write(this.getServletContext()
-                               .getRealPath("/upload/" + filename));
-                    s.setPhoto(filename);
-                }
+        try {
+            // 사진 데이터 처리
+            Part part = request.getPart("file1");
+            if (part.getSize() > 0) {
+                String filename = UUID.randomUUID().toString();
+                part.write(this.getServletContext()
+                           .getRealPath("/upload/" + filename));
+                s.setPhoto(filename);
+            }
+            
             studentService.add(s);
             response.sendRedirect("list");
             

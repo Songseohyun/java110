@@ -39,6 +39,7 @@ public class StudentMysqlDao implements StudentDao {
             
         } finally {
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
     
@@ -80,6 +81,7 @@ public class StudentMysqlDao implements StudentDao {
         } finally {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
         return list;
     }
@@ -99,11 +101,11 @@ public class StudentMysqlDao implements StudentDao {
                     " m.name," + 
                     " m.email," + 
                     " s.schl," +
-                    " s.work," + 
+                    " s.work," +
                     " mp.photo" +
                     " from p1_stud s" + 
                     " inner join p1_memb m on s.sno = m.mno" +
-                    " left outer join p1_memb_phot mp on s.sno=mp.mno "+
+                    " left outer join p1_memb_phot mp on s.sno = mp.mno" +
                     " where m.email='" + email + "'");
             
             if (rs.next()) {
@@ -126,6 +128,7 @@ public class StudentMysqlDao implements StudentDao {
         } finally {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
     
@@ -145,11 +148,11 @@ public class StudentMysqlDao implements StudentDao {
                     " m.email," + 
                     " m.tel," + 
                     " s.schl," +
-                    " s.work," +  
+                    " s.work," +
                     " mp.photo" +
                     " from p1_stud s" + 
                     " inner join p1_memb m on s.sno = m.mno" +
-                    " left outer join p1_memb_phot mp on s.sno=mp.mno "+
+                    " left outer join p1_memb_phot mp on s.sno = mp.mno" +
                     " where m.mno=" + no);
             
             if (rs.next()) {
@@ -172,6 +175,7 @@ public class StudentMysqlDao implements StudentDao {
         } finally {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
     
@@ -191,6 +195,7 @@ public class StudentMysqlDao implements StudentDao {
             
         } finally {
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
     
@@ -238,6 +243,7 @@ public class StudentMysqlDao implements StudentDao {
         } finally {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
 }

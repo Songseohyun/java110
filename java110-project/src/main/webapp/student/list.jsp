@@ -2,7 +2,7 @@
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,8 +20,6 @@ table, th, td {
 <jsp:include page="../header.jsp"></jsp:include>
 
 <h1>학생 목록(MVC)</h1>
-
-
 <p><a href='add'>추가</a></p>
 <table>
 <thead>
@@ -30,7 +28,7 @@ table, th, td {
 </tr>
 </thead>
 <tbody>
-<c:forEach items="${list}" var="s">
+<c:forEach  items="${list}" var="s">
 <tr>
     <td>${s.no}</td>
     <td><a href='detail?no=${s.no}'>${s.name}</a></td>

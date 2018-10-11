@@ -1,4 +1,3 @@
-<%@page import="bitcamp.java110.cms.domain.Manager"%>
 <%@ page language="java" 
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
@@ -15,7 +14,7 @@ table, th, td {
     border: 1px solid gray;
 }
 #photo-image {
-    height: 100px; 
+    height: 100px;
 }
 </style>
 </head>
@@ -25,7 +24,6 @@ table, th, td {
 
 <h1>매니저 상세정보(MVC)</h1>
 
-
 <table>
 <tbody>
 <tr><th>번호</th><td>${manager.no}</td></tr>
@@ -34,13 +32,17 @@ table, th, td {
 <tr><th>암호</th><td>${manager.password}</td></tr>
 <tr><th>전화</th><td>${manager.tel}</td></tr>
 <tr><th>직위</th><td>${manager.position}</td></tr>
-<tr><th>사진</th>
+<tr>
+    <th>사진</th>
 <c:choose>
 <c:when test="${not empty manager.photo}">
-    <td><img id='photo-image' src='/upload/${manager.photo}'></td></tr>
+    <td><img id='photo-image' src='/upload/${manager.photo}'></td>
 </c:when>
-<c:otherwise><img id='photo-image' src='/img/anonymous.jpg'></c:otherwise>
+<c:otherwise>
+    <td><img id='photo-image' src='/img/anonymous.png'></td>
+</c:otherwise>
 </c:choose>
+</tr>
 </tbody>
 </table>
 <button type='button' onclick='remove()'>삭제</button>

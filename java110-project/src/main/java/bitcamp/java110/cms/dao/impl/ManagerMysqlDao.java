@@ -27,18 +27,18 @@ public class ManagerMysqlDao implements ManagerDao {
         try {
             con = dataSource.getConnection();
             stmt = con.createStatement();
-           
             String sql = "insert into p1_mgr(mrno,posi)"
                     + " values(" + manager.getNo()
                     + ",'" + manager.getPosition()
                     + "')";
-        
             return stmt.executeUpdate(sql);
-
+            
         } catch (Exception e) {
             throw new DaoException(e);
+            
         } finally {
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
     
@@ -52,7 +52,6 @@ public class ManagerMysqlDao implements ManagerDao {
         
         try {
             con = dataSource.getConnection();
-            
             stmt = con.createStatement();
             
             rs = stmt.executeQuery(
@@ -79,6 +78,7 @@ public class ManagerMysqlDao implements ManagerDao {
         } finally {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
         return list;
     }
@@ -93,17 +93,17 @@ public class ManagerMysqlDao implements ManagerDao {
             
             stmt = con.createStatement();
             rs = stmt.executeQuery(
-                            "select" + 
-                            " m.mno," +
-                            " m.name," + 
-                            " m.email," + 
-                            " m.tel," + 
-                            " mr.posi," + 
-                            " mp.photo " +
-                            " from p1_mgr mr" + 
-                            " inner join p1_memb m on mr.mrno = m.mno"  +
-                            " left outer join p1_memb_phot mp on mr.mrno=mp.mno "+
-                            " where m.email='" + email + "'");
+                    "select" + 
+                    " m.mno," +
+                    " m.name," + 
+                    " m.email," + 
+                    " m.tel," + 
+                    " mr.posi," +
+                    " mp.photo" +
+                    " from p1_mgr mr" + 
+                    " inner join p1_memb m on mr.mrno = m.mno" +
+                    " left outer join p1_memb_phot mp on mr.mrno = mp.mno" +
+                    " where m.email='" + email + "'");
             
             if (rs.next()) {
                 Manager mgr = new Manager();
@@ -124,6 +124,7 @@ public class ManagerMysqlDao implements ManagerDao {
         } finally {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
     
@@ -142,11 +143,11 @@ public class ManagerMysqlDao implements ManagerDao {
                     " m.name," + 
                     " m.email," + 
                     " m.tel," + 
-                    " mr.posi," + 
-                    " mp.photo " +
+                    " mr.posi," +
+                    " mp.photo" +
                     " from p1_mgr mr" + 
-                    " inner join p1_memb m on mr.mrno = m.mno"  +
-                    " left outer join p1_memb_phot mp on mr.mrno=mp.mno "+
+                    " inner join p1_memb m on mr.mrno = m.mno" +
+                    " left outer join p1_memb_phot mp on mr.mrno = mp.mno" +
                     " where m.mno=" + no);
             
             if (rs.next()) {
@@ -168,6 +169,7 @@ public class ManagerMysqlDao implements ManagerDao {
         } finally {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
     
@@ -178,7 +180,6 @@ public class ManagerMysqlDao implements ManagerDao {
         try {
             con = dataSource.getConnection();
             stmt = con.createStatement();
-            
             String sql = "delete from p1_mgr where mrno=" + no ;
             return stmt.executeUpdate(sql);
             
@@ -187,6 +188,7 @@ public class ManagerMysqlDao implements ManagerDao {
             
         } finally {
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
     
@@ -231,10 +233,26 @@ public class ManagerMysqlDao implements ManagerDao {
         } finally {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

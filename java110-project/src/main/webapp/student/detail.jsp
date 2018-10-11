@@ -1,4 +1,3 @@
-<%@page import="bitcamp.java110.cms.domain.Student"%>
 <%@ page language="java" 
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
@@ -15,7 +14,7 @@ table, th, td {
     border: 1px solid gray;
 }
 #photo-image {
-    height: 100px; 
+    height: 100px;
 }
 </style>
 </head>
@@ -25,18 +24,6 @@ table, th, td {
 
 <h1>학생 상세정보(MVC)</h1>
 
-<jsp:useBean 
-    scope="request"
-    id="student"
-    class="bitcamp.java110.cms.domain.Student"
-/>
-<%
-if (student == null) {
-%>
-<p>해당 번호의 학생이 없습니다!</p>
-<%    
-} else {
-%>
 <table>
 <tbody>
 <tr><th>번호</th><td>${student.no}</td></tr>
@@ -46,14 +33,17 @@ if (student == null) {
 <tr><th>전화</th><td>${student.tel}</td></tr>
 <tr><th>최종학교</th><td>${student.school}</td></tr>
 <tr><th>재직여부</th><td>${student.working}</td></tr>
-<tr><th>사진</th>
+<tr>
+<th>사진</th>
 <c:choose>
 <c:when test="${not empty student.photo}">
-    <td><img id='photo-image' src='/upload/${student.photo}'></td></tr>
+    <td><img id='photo-image' src='/upload/${student.photo}'></td>
 </c:when>
-<c:otherwise><img id='photo-image' src='/img/anonymous.jpg'></c:otherwise>
+<c:otherwise>
+    <td><img id='photo-image' src='/img/anonymous.png'></td>
+</c:otherwise>
 </c:choose>
-
+</tr>
 </tbody>
 </table>
 <button type='button' onclick='remove()'>삭제</button>
@@ -62,9 +52,6 @@ function remove() {
     location.href = 'delete?no=${student.no}'
 }
 </script>
-<%
-}
-%>
 
 <jsp:include page="../footer.jsp"/>
 

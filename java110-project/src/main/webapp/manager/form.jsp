@@ -20,8 +20,6 @@ th {
 
 <h1>매니저 등록(MVC)</h1>
 
-<%-- URL 인코딩 하는이유 일부 네트워크가  ASCICODE 7 비트 라서 8비트로보내면 꺠져버린다 .
-그러므로 enctype 인코딩 타입을 UTF-8로 보내면안된다.  --%>
 <form action='add' method='post' enctype="multipart/form-data">
 <table>
 <tbody>
