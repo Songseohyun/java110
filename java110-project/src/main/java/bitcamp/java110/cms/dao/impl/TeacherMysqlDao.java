@@ -1,8 +1,8 @@
 package bitcamp.java110.cms.dao.impl;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,18 +21,17 @@ public class TeacherMysqlDao implements TeacherDao {
 
     public int insert(Teacher teacher) throws DaoException {
         Connection con = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         
         try {
             con = dataSource.getConnection();
-            stmt = con.createStatement();
-            
             String sql = "insert into p1_tchr(tno,hrpay,subj)"
-                    + " values(" + teacher.getNo()
-                    + "," + teacher.getPay()
-                    + ",'" + teacher.getSubjects()
-                    + "')";
-            return stmt.executeUpdate(sql);
+                    + " values(?,?,?)";
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, teacher.getNo());
+            stmt.setInt(2, teacher.getPay());
+            stmt.setString(3, teacher.getSubjects());
+            return stmt.executeUpdate();
             
         } catch (Exception e) {
             throw new DaoException(e);
@@ -48,15 +47,12 @@ public class TeacherMysqlDao implements TeacherDao {
         ArrayList<Teacher> list = new ArrayList<>();
         
         Connection con = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         ResultSet rs = null;
         
         try {
             con = dataSource.getConnection();
-            
-            stmt = con.createStatement();
-            
-            rs = stmt.executeQuery(
+            String sql = 
                     "select" + 
                     " m.mno," +
                     " m.name," + 
@@ -64,7 +60,10 @@ public class TeacherMysqlDao implements TeacherDao {
                     " t.hrpay," +
                     " t.subj" +
                     " from p1_tchr t" + 
-                    " inner join p1_memb m on t.tno = m.mno");
+                    " inner join p1_memb m on t.tno = m.mno";
+            
+            stmt = con.prepareStatement(sql);
+            rs = stmt.executeQuery();
             
             while (rs.next()) {
                 Teacher s = new Teacher();
@@ -88,14 +87,12 @@ public class TeacherMysqlDao implements TeacherDao {
     
     public Teacher findByEmail(String email) throws DaoException {
         Connection con = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         ResultSet rs = null;
         
         try {
             con = dataSource.getConnection();
-            
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(
+            String sql =
                     "select" + 
                     " m.mno," +
                     " m.name," + 
@@ -105,7 +102,11 @@ public class TeacherMysqlDao implements TeacherDao {
                     " from p1_tchr t" + 
                     " inner join p1_memb m on t.tno = m.mno" +
                     " left outer join p1_memb_phot mp on t.tno = mp.mno" +
-                    " where m.email='" + email + "'");
+                    " where m.email=? ";
+            
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, email);
+            rs = stmt.executeQuery();
             
             if (rs.next()) {
                 Teacher t = new Teacher();
@@ -133,14 +134,12 @@ public class TeacherMysqlDao implements TeacherDao {
     
     public Teacher findByNo(int no) throws DaoException {
         Connection con = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         ResultSet rs = null;
         
         try {
             con = dataSource.getConnection();
-            
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(
+            String sql = 
                     "select" + 
                     " m.mno," +
                     " m.name," + 
@@ -152,7 +151,11 @@ public class TeacherMysqlDao implements TeacherDao {
                     " from p1_tchr t" + 
                     " inner join p1_memb m on t.tno = m.mno" +
                     " left outer join p1_memb_phot mp on t.tno = mp.mno" +
-                    " where m.mno=" + no);
+                    " where m.mno=?" ;
+            
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, no);
+            rs = stmt.executeQuery();
             
             if (rs.next()) {
                 Teacher t = new Teacher();
@@ -180,13 +183,13 @@ public class TeacherMysqlDao implements TeacherDao {
     
     public int delete(int no) throws DaoException {
         Connection con = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         
         try {
             con = dataSource.getConnection();
-            stmt = con.createStatement();
-            
-            String sql = "delete from p1_tchr where tno=" + no ;
+            String sql = "delete from p1_tchr where tno=?" ;
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, no);
             return stmt.executeUpdate(sql);
             
         } catch (Exception e) {
@@ -201,14 +204,12 @@ public class TeacherMysqlDao implements TeacherDao {
     @Override
     public Teacher findByEmailPassword(String email, String password) throws DaoException {
         Connection con = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         ResultSet rs = null;
         
         try {
             con = dataSource.getConnection();
-            
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(
+            String sql = 
                     "select" + 
                     " m.mno," +
                     " m.name," + 
@@ -218,9 +219,12 @@ public class TeacherMysqlDao implements TeacherDao {
                     " t.subj" +
                     " from p1_tchr t" + 
                     " inner join p1_memb m on t.tno = m.mno" +
-                    " where m.email='" + email + 
-                    "' and m.pwd=password('" + password +
-                    "')");
+                    " where m.email=? and m.pwd =password(?)"; 
+            
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, email);
+            stmt.setString(2, password);
+            rs = stmt.executeQuery();
             
             if (rs.next()) {
                 Teacher t = new Teacher();

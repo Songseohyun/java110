@@ -1,5 +1,21 @@
 # java110-project
 
+## v5.6
+
+- Statement를 PreparedStatement
+    -SQL 삽입 해킹을 방지하기
+- 작업
+    - 로그인 방어막을 뚫기 및 문제점 확인
+    - DAO의 모든 SQL문을 PreparedStatement로 교체한다.
+
+## v5.5
+
+- 트랜잭션 관리
+- 작업
+    - 트랜잭션을 위해 DataSource의 Connection을 관리하는 클래스를 작성한다.
+    - DataSource는 트랜잭션을 사용할 때와 아닐 때를 다룬다.
+    - 서비스 객체에 트랜잭션 관리자를 적용한다.
+
 ## java110-project (tag: v5.4)
 
 - Service 컴포넌트 적용
