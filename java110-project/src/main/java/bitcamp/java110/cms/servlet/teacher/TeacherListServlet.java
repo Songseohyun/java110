@@ -22,11 +22,25 @@ public class TeacherListServlet extends HttpServlet {
             HttpServletRequest request, 
             HttpServletResponse response) 
             throws ServletException, IOException {
+
+        int pageNo = 1;
+        int pageSize = 3;
         
-        TeacherService teacherService = (TeacherService)this.getServletContext()
-                .getAttribute("teacherService");
+        if(request.getParameter("pageNo") != null) {
+            pageNo = Integer.parseInt(request.getParameter("pageNo"));
+            if(pageNo < 1)  pageNo =1;
+        }
         
-        List<Teacher> list = teacherService.list();
+        if(request.getParameter("pageSize") != null) {
+            pageSize = Integer.parseInt(request.getParameter("pageSize"));
+            if(pageSize < 3 || pageSize > 10)  pageSize =3;
+        }
+        
+        TeacherService teacherService = 
+                (TeacherService)this.getServletContext()
+                                    .getAttribute("teacherService");
+        List<Teacher> list = teacherService.list(pageNo, pageSize);
+        
         request.setAttribute("list", list);
         
         response.setContentType("text/html;charset=UTF-8");
@@ -34,5 +48,6 @@ public class TeacherListServlet extends HttpServlet {
         RequestDispatcher rd = request.getRequestDispatcher(
                 "/teacher/list.jsp");
         rd.include(request, response);
+        
     }
 }

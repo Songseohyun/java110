@@ -46,8 +46,10 @@ public class ContextLoaderListener implements ServletContextListener {
             managerDao.setSqlSessionFactory(sqlSessionFactory);
             
             StudentMysqlDao studentDao = new StudentMysqlDao();
+            studentDao.setSqlSessionFactory(sqlSessionFactory);
             
             TeacherMysqlDao teacherDao = new TeacherMysqlDao();
+            teacherDao.setSqlSessionFactory(sqlSessionFactory);
             
             // 서비스 객체 준비하기
             ManagerServiceImpl managerService = new ManagerServiceImpl();

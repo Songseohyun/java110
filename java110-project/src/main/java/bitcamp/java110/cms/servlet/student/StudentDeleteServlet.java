@@ -20,11 +20,12 @@ public class StudentDeleteServlet extends HttpServlet {
             HttpServletResponse response) 
             throws ServletException, IOException {
 
-        
         int no = Integer.parseInt(request.getParameter("no"));
         
-        StudentService studentService = (StudentService)this.getServletContext()
-                .getAttribute("studentService");
+        
+        StudentService studentService = 
+                (StudentService)this.getServletContext()
+                                    .getAttribute("studentService");
         
         try {
             studentService.delete(no);
@@ -37,7 +38,7 @@ public class StudentDeleteServlet extends HttpServlet {
             
             request.getRequestDispatcher("/error").forward(request, response);
         }
-        
     }
+}    
 
-}
+

@@ -22,8 +22,10 @@ public class TeacherDeleteServlet extends HttpServlet {
 
         int no = Integer.parseInt(request.getParameter("no"));
         
-        TeacherService teacherService = (TeacherService)this.getServletContext()
-                .getAttribute("teacherService");
+        
+        TeacherService teacherService = 
+                (TeacherService)this.getServletContext()
+                                    .getAttribute("teacherService");
         
         try {
             teacherService.delete(no);
