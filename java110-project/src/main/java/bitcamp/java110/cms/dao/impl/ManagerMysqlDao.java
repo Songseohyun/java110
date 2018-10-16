@@ -1,27 +1,26 @@
 package bitcamp.java110.cms.dao.impl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import bitcamp.java110.cms.dao.DaoException;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
 import bitcamp.java110.cms.dao.ManagerDao;
 import bitcamp.java110.cms.domain.Manager;
-import bitcamp.java110.cms.util.DataSource;
 
 public class ManagerMysqlDao implements ManagerDao {
     
-    DataSource dataSource;
+    SqlSessionFactory sqlSessionFactory;
     
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
+        this.sqlSessionFactory = sqlSessionFactory;
     }
-
-    public int insert(Manager manager) throws DaoException {
+    @Override
+    public int insert(Manager manager) {
+        /*
         PreparedStatement stmt = null;
-        
         Connection con = null;
         
         try {
@@ -39,11 +38,17 @@ public class ManagerMysqlDao implements ManagerDao {
         } finally {
             try {stmt.close();} catch (Exception e) {}
             dataSource.returnConnection(con);
-        }
+        }*/
+        return 0;
     }
-    
-    public List<Manager> findAll() throws DaoException {
+    @Override
+    public List<Manager> findAll(Map<String,Object> params) {
         
+        try(SqlSession sqlSession = sqlSessionFactory.openSession();){
+            return sqlSession.selectList("bitcamp.java110.cms.dao.ManagerDao.findAll", params);
+        }
+        
+        /*
         ArrayList<Manager> list = new ArrayList<>();
         
         Connection con = null;
@@ -82,10 +87,11 @@ public class ManagerMysqlDao implements ManagerDao {
             try {stmt.close();} catch (Exception e) {}
             dataSource.returnConnection(con);
         }
-        return list;
+        return list;*/
     }
-    
-    public Manager findByEmail(String email) throws DaoException {
+    @Override
+    public Manager findByEmail(String email) {
+        /*
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -128,10 +134,12 @@ public class ManagerMysqlDao implements ManagerDao {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
             dataSource.returnConnection(con);
-        }
+        }*/
+        return null;
     }
-    
-    public Manager findByNo(int no) throws DaoException {
+    @Override
+    public Manager findByNo(int no) {
+        /*
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -175,10 +183,12 @@ public class ManagerMysqlDao implements ManagerDao {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
             dataSource.returnConnection(con);
-        }
+        }*/
+        return null;
     }
-    
-    public int delete(int no) throws DaoException {
+    @Override
+    public int delete(int no) {
+        /*
         Connection con = null;
         PreparedStatement stmt = null;
         
@@ -195,11 +205,13 @@ public class ManagerMysqlDao implements ManagerDao {
         } finally {
             try {stmt.close();} catch (Exception e) {}
             dataSource.returnConnection(con);
-        }
+        }*/
+        return 0;
     }
     
     @Override
-    public Manager findByEmailPassword(String email, String password) throws DaoException {
+    public Manager findByEmailPassword(String email, String password) {
+        /*
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -242,7 +254,8 @@ public class ManagerMysqlDao implements ManagerDao {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
             dataSource.returnConnection(con);
-        }
+        }*/
+        return null;
     }
     
 }
